@@ -1,5 +1,6 @@
 #Changelog for StickyNotes
 
-v1.0.0
+v1.0.0.0
 modified for a v5 module using a PowerShell class
+published to GitHub
 
