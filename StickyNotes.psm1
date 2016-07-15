@@ -89,13 +89,6 @@ static [void]SetAlignment([Alignment]$Alignment) {
 
 static [void]SetFontSize([int]$Size) {
      
-     if (($Size -lt -5) -OR ($Size -gt 5)) { 
-      Write-Warning "You just specify a size between -5 and 5"
-      #bail out
-      Return
-      
-      }
-
      [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
      [System.Windows.Forms.SendKeys]::SendWait("^a")
      Start-Sleep -Milliseconds 50
@@ -110,27 +103,10 @@ static [void]SetFontSize([int]$Size) {
         [System.Windows.Forms.SendKeys]::SendWait("^+>")
         }
     }
-    <#
-    else {
-        #restore to original size
-        if ($this.FontSize -lt 0) {
-            Do {
-                [System.Windows.Forms.SendKeys]::SendWait("^+>")
-                $this.FontSize++
-            } until ($this.FontSize -eq 0)
-        }
-        elseif ($this.FontSize -gt 0) {
-            Do {
-                [System.Windows.Forms.SendKeys]::SendWait("^+<")
-                $this.FontSize--
-            } until ($this.FontSize -eq 0)
-        }
-    }
-    #>
+    
     Start-Sleep -Milliseconds 50
     [System.Windows.Forms.SendKeys]::SendWait("{Down}")
     [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
-    #$this.FontSize += $size
 }
 
 static [void]SetText([string]$Text,[boolean]$Append) {
@@ -205,22 +181,6 @@ else {
 
 Function New-StickyNote {
 
-<#
-.Synopsis
-Create a new sticky note.
-.Description
-This command will create a sticky note. You can specify additional formatting options. 
-
-.Example
-PS C:\> New-StickyNote "pickup milk on the way home" -bold
-.Notes
-Version     : 1.0
-
-Learn more about PowerShell:
-http://jdhitsolutions.com/blog/essential-powershell-resources/
-
-#>
-
 [cmdletbinding()]
 Param(
 [Parameter(
@@ -250,28 +210,6 @@ Write-Verbose "Ending $($MyInvocation.MyCommand)"
 
 Function Set-StickyNote {
 
-<#
-.Synopsis
-Set text and style for a sticky note.
-.Description
-This command will set the text and style for a sticky note. If there are multiple notes, this command will set the one that has focus, which you must do manually. The default is the last note created.
-
-The style parameters like Bold behave more like toggles. If text is already in bold than using -Bold will turn it off and vice versa.
-
-.Parameter Append
-Append your text to the end of the note. Otherwise existing text will be replaced
-.Example
-PS C:\> set-stickynote "pickup milk on the way home" -bold -underline -append
-.Notes
-
-Version     : 1.0
-
-Learn more about PowerShell:
-http://jdhitsolutions.com/blog/essential-powershell-resources/
-
-
-#>
-
 [cmdletbinding()]
 Param(
 [Parameter(position=0)]
@@ -281,9 +219,7 @@ Param(
 [switch]$Underline,
 [ValidateSet("Left","Center","Right")]
 [string]$Alignment,
-[switch]$Right,
 [switch]$Append,
-[ValidateRange(-5,5)]
 [int]$FontSize = 0
 )
 
@@ -326,32 +262,14 @@ Write-Verbose "Ending $($MyInvocation.MyCommand)"
 
 Function Remove-StickyNote {
 
-<#
-.Synopsis
-Remove a new sticky note.
-.Description
-This command will remove the sticky note that has focus. If you have more than one note, the last one created has focus, unless you manually select a different one.
-
-If you kill the stikynot process, the next time you create a note, any previously created notes will return.
-
-.Example
-PS C:\> remove-stickynote 
-
-.Notes
-Version     : 1.0
-
-Learn more about PowerShell:
-http://jdhitsolutions.com/blog/essential-powershell-resources/
-
-
-#>
-
 [cmdletbinding(SupportsShouldProcess)]
 Param()
 
 Write-Verbose "Starting $($MyInvocation.MyCommand)"
 if ([mystickynote]::TestProcess()) {
+    if ($PSCmdlet.ShouldProcess("Sticky Notes")) {
     [mystickynote]::Remove()
+    }
 }
 else {
     Write-Warning "No sticky notes seem to be running"

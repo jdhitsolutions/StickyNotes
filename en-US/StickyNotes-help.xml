@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>New-StickyNote</command:name>
+<command:verb>New</command:verb>
+<command:noun>StickyNote</command:noun>
+<maml:description><maml:para>Create a new sticky note.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>This command will create a sticky note with the specified text and formatting options.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>New-StickyNote</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<maml:Description><maml:para>Enter text for the sticky note.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Bold</maml:name>
+<maml:Description><maml:para>Make text bold faced.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Italic</maml:name>
+<maml:Description><maml:para>Make text italic.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Underline</maml:name>
+<maml:Description><maml:para>Underline text.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Alignment</maml:name>
+<maml:Description><maml:para>Set the text alignment. Possible values for Left, Center and Right.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>Left</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<maml:Description><maml:para>Enter text for the sticky note.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Bold</maml:name>
+<maml:Description><maml:para>Make text bold faced.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Italic</maml:name>
+<maml:Description><maml:para>Make text italic.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Underline</maml:name>
+<maml:Description><maml:para>Underline text.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Alignment</maml:name>
+<maml:Description><maml:para>Set the text alignment. Possible values for Left, Center and Right.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>Left</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+</maml:para>
+<maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>PS C:\&gt; New-StickyNote "pickup milk on the way home" -bold -alignment center</dev:code>
+<dev:remarks><maml:para>Create a sticky note with bold text and centered
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Set-StickyNote</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+<maml:navigationLink><maml:linkText>Remove-StickyNote</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Remove-StickyNote</command:name>
+<command:verb>Remove</command:verb>
+<command:noun>StickyNote</command:noun>
+<maml:description><maml:para>Remove a new sticky note.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>This command will remove the sticky note that has focus. If you have more than one note, the last one created has focus, unless you manually select a different one.
+</maml:para>
+<maml:para>If you kill the 'StikyNot.exe' process, the next time you create a note, any previously created notes will return.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Remove-StickyNote</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+</maml:para>
+<maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>PS C:\&gt; remove-stickynote</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>New-StickyNote</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Set-StickyNote</command:name>
+<command:verb>Set</command:verb>
+<command:noun>StickyNote</command:noun>
+<maml:description><maml:para>Set text and style for a sticky note.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>This command will set the text and style for a sticky note. If there are multiple notes, this command will set the one that has focus, which you must do manually. The default is the last note created.
+</maml:para>
+<maml:para>The style parameters like -Bold behave more like toggles. If text is already in bold than using -Bold will turn it off and vice versa.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Set-StickyNote</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<maml:Description><maml:para>The text for the sticky note.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Bold</maml:name>
+<maml:Description><maml:para>Set the text to bold faced.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Italic</maml:name>
+<maml:Description><maml:para>Set the text to italic.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Underline</maml:name>
+<maml:Description><maml:para>Set the text to underline.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Alignment</maml:name>
+<maml:Description><maml:para>Set the text to the specified alignment. Valid values are Left, Center or Right.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Append</maml:name>
+<maml:Description><maml:para>Append your text to the end of the note. Otherwise existing text will be replaced
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontSize</maml:name>
+<maml:Description><maml:para>Adjust the font size up or down. Use a positive number to increase and a negative number to decrease. A value of 0 will not do  anything.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>0</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<maml:Description><maml:para>The text for the sticky note.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Bold</maml:name>
+<maml:Description><maml:para>Set the text to bold faced.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Italic</maml:name>
+<maml:Description><maml:para>Set the text to italic.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Underline</maml:name>
+<maml:Description><maml:para>Set the text to underline.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Alignment</maml:name>
+<maml:Description><maml:para>Set the text to the specified alignment. Valid values are Left, Center or Right.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Append</maml:name>
+<maml:Description><maml:para>Append your text to the end of the note. Otherwise existing text will be replaced
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontSize</maml:name>
+<maml:Description><maml:para>Adjust the font size up or down. Use a positive number to increase and a negative number to decrease. A value of 0 will not do  anything.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>0</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+</maml:para>
+<maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+<dev:code>PS C:\&gt; set-stickynote "pickup bread on the way home" -bold -underline -append</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>New-StickyNote</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+</helpItems>
