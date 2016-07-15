@@ -1,17 +1,17 @@
 ---
 external help file: StickyNotes-help.xml
-online version: 
 schema: 2.0.0
+online version: 
 ---
 
 # Set-StickyNote
 ## SYNOPSIS
 Set text and style for a sticky note.
-
 ## SYNTAX
 
 ```
-Set-StickyNote [[-Text] <String>] [-Bold] [-Italic] [-Underline] [-Alignment <String>] [-Append] [-FontSize <Int32>]
+Set-StickyNote [[-Text] <String>] [-Bold] [-Italic] [-Underline] [-Alignment <String>] [-Append]
+ [-FontSize <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,7 +21,6 @@ The default is the last note created.
 
 The style parameters like -Bold behave more like toggles.
 If text is already in bold than using -Bold will turn it off and vice versa.
-
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
@@ -139,15 +138,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+
 ## INPUTS
 
+### None
+
 ## OUTPUTS
+
+### None
 
 ## NOTES
 Version     : 1.0
 
 Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/
-
 ## RELATED LINKS
+
 [New-StickyNote]()

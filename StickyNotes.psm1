@@ -179,6 +179,18 @@ else {
 
 } #class
 
+Function Restore-StickyNote {
+[cmdletbinding()]
+Param()
+
+Write-Verbose "Starting: $($MyInvocation.Mycommand)"
+
+[myStickyNote]::new()
+
+Write-Verbose "Ending: $($MyInvocation.Mycommand)"
+
+}
+
 Function New-StickyNote {
 
 [cmdletbinding()]
@@ -281,8 +293,9 @@ Write-Verbose "Ending $($MyInvocation.MyCommand)"
 } #end function
 
 #define aliases
-Set-Alias -Name rn -Value Remove-StickyNote
+Set-Alias -Name kn -Value Remove-StickyNote
 Set-Alias -Name sn -Value Set-StickyNote
 Set-Alias -Name nn -Value New-StickyNote
+Set-Alias -Name rn -Value Restore-StickyNote
 
 

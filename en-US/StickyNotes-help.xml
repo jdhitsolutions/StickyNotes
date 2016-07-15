@@ -103,8 +103,20 @@
 <dev:defaultValue>Left</dev:defaultValue>
 </command:parameter>
 </command:parameters>
-<command:inputTypes></command:inputTypes>
-<command:returnValues></command:returnValues>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
 <maml:alertSet><maml:alert><maml:para>Version     : 1.0
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
@@ -177,8 +189,20 @@
 <dev:defaultValue>False</dev:defaultValue>
 </command:parameter>
 </command:parameters>
-<command:inputTypes></command:inputTypes>
-<command:returnValues></command:returnValues>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
 <maml:alertSet><maml:alert><maml:para>Version     : 1.0
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
@@ -187,6 +211,62 @@
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
 <dev:code>PS C:\&gt; remove-stickynote</dev:code>
+<dev:remarks><maml:para>
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>New-StickyNote</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Restore-StickyNote</command:name>
+<command:verb>Restore</command:verb>
+<command:noun>StickyNote</command:noun>
+<maml:description><maml:para>Restore sticky notes or start blank.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>If the Sticky Notes process (stikynot.exe) process crashes or is killed, the next time you start it, any existing notes will be restored. You can use this command to restore notes if you know the process was improperly terminated. Or you can use this command to create a blank note.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Restore-StickyNote</maml:name>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>None</maml:name>
+<maml:Description><maml:para>
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+<dev:type><maml:name></maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+</maml:para>
+<maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Restore-StickyNote</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
 </dev:remarks>
@@ -336,8 +416,20 @@
 <dev:defaultValue>0</dev:defaultValue>
 </command:parameter>
 </command:parameters>
-<command:inputTypes></command:inputTypes>
-<command:returnValues></command:returnValues>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
 <maml:alertSet><maml:alert><maml:para>Version     : 1.0
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
