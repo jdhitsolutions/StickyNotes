@@ -1,6 +1,8 @@
 # StickyNotes #
 
-A set of PowerShell functions for using Sticky Notes in Windows,
+A set of PowerShell functions for using Sticky Notes in Windows.
+These commands require PowerShell version 5 and a client version
+of Windows. Read the About_StickyNotes help file to learn more.
 
 ****************************************************************
 DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED 
