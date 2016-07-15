@@ -1,5 +1,6 @@
 # StickyNotes #
 
+A set of PowerShell functions for using Sticky Notes in Windows,
 
 ****************************************************************
 DO NOT USE IN A PRODUCTION ENVIRONMENT UNTIL YOU HAVE TESTED 
