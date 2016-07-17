@@ -12,7 +12,7 @@ Write-Verbose "Starting: $($MyInvocation.Mycommand)"
 
 Write-Verbose "Ending: $($MyInvocation.Mycommand)"
 
-}
+} #end function
 
 Function New-StickyNote {
 
@@ -21,7 +21,8 @@ Param(
 [Parameter(
 Position=0,
 Mandatory,
-HelpMessage="Enter text for the sticky note"
+HelpMessage="Enter text for the sticky note",
+ValueFromPipeline
 )]
 [string]$Text,
 [switch]$Bold,
@@ -31,15 +32,21 @@ HelpMessage="Enter text for the sticky note"
 [string]$Alignment = "Left"
 )
 
-Write-Verbose "Starting $($MyInvocation.MyCommand)"
-#display PSBoundparameters formatted nicely for Verbose output  
-[string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
+Begin {
+    Write-Verbose "[BEGIN  ] Starting $($MyInvocation.MyCommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
+}
 
-[mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic)
+Process {
+    Write-Verbose "[PROCESS] Creating a sticky note."
+    [mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic)
+}
 
-Write-Verbose "Ending $($MyInvocation.MyCommand)"
-
+End {
+    Write-Verbose "[END    ] Ending $($MyInvocation.MyCommand)"
+}
 
 } #end function
 
@@ -47,7 +54,7 @@ Function Set-StickyNote {
 
 [cmdletbinding()]
 Param(
-[Parameter(position=0)]
+[Parameter(Position=0,ValueFromPipeline)]
 [string]$Text,
 [switch]$Bold,
 [switch]$Italic,
@@ -58,40 +65,52 @@ Param(
 [int]$FontSize = 0
 )
 
-Write-Verbose "Starting $($MyInvocation.MyCommand)"
-#display PSBoundparameters formatted nicely for Verbose output  
-[string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
-
-if ($Text -AND $append) {
-Write-Verbose "Appending"
-    [MyStickyNote]::SetText($Text,$True)
-}
-elseif ($Text) {
-   [MyStickyNote]::SetText($Text,$False)
+Begin {
+    Write-Verbose "[BEGIN  ] Starting $($MyInvocation.MyCommand)"
+    #display PSBoundparameters formatted nicely for Verbose output  
+    [string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
+    Write-Verbose "[BEGIN  ] PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
 }
 
-if ($Alignment) {
-    [MyStickyNote]::SetAlignment($Alignment)
-}
+Process {
 
-if ($Bold) {
-    [MyStickyNote]::ToggleBold()
-}
+    if ($Text -AND $append) {
+        Write-Verbose "[PROCESS] Appending text"
+        [MyStickyNote]::SetText($Text,$True)
+    }
+    elseif ($Text) {
+        Write-Verbose "[PROCESS] Replacing text"
+       [MyStickyNote]::SetText($Text,$False)
+    }
 
-if ($Underline) {
-    [MyStickyNote]::ToggleUnderline()
-}
-if ($Italic) {
-    [MyStickyNote]::ToggleItalic()
-}
+    if ($Alignment) {
+        Write-Verbose "[PROCESS] Aligning $Alignment"
+        [MyStickyNote]::SetAlignment($Alignment)
+    }
 
-if ($FontSize) {
-    [MyStickyNote]::SetFontSize($FontSize)
+    if ($Bold) {
+        Write-Verbose "[PROCESS] Toggling Bold"
+        [MyStickyNote]::ToggleBold()
+    }
+
+    if ($Underline) {
+        Write-Verbose "[PROCESS] Toggling Underline"
+        [MyStickyNote]::ToggleUnderline()
+    }
+    if ($Italic) {
+        Write-Verbose "[PROCESS] Toggling Italic"
+        [MyStickyNote]::ToggleItalic()
+    }
+
+    if ($FontSize) {
+        Write-Verbose "[PROCESS] Modifying Font Size $Fontsize"
+        [MyStickyNote]::SetFontSize($FontSize)
+    }
+ }
+   
+End {
+    Write-Verbose "[END    ] Ending $($MyInvocation.MyCommand)"
 }
-
-Write-Verbose "Ending $($MyInvocation.MyCommand)"
-
 
 } #end function
 

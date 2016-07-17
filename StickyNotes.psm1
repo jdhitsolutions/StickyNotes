@@ -2,6 +2,12 @@
 
 #StickyNotes.psm1
 
+#verify Stikynotes.exe and throw an error if not found
+If (-Not (Test-path $env:windir\system32\stikynot.exe)) {
+    Throw "Cannot find $env:windir\system32\stikynot.exe. This module is intended for client operating systems." 
+}
+
+#an enumeration that can be used in the functions
 Enum Alignment {
     Left
     Right
@@ -10,7 +16,7 @@ Enum Alignment {
 
 Class MyStickyNote {
 
-# this class has no properties
+#this class has no properties
 
 #methods
 
@@ -32,8 +38,7 @@ static [void]ToggleBold() {
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
 
-static [void]ToggleItalic() {
-  
+static [void]ToggleItalic() {  
   [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
   [System.Windows.Forms.SendKeys]::SendWait("^a")
   Start-Sleep -Milliseconds 50
@@ -43,13 +48,12 @@ static [void]ToggleItalic() {
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
 
-static [void]ToggleUnderline() {
-   
+static [void]ToggleUnderline() {   
   [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
   [System.Windows.Forms.SendKeys]::SendWait("^a")
-  start-sleep -Milliseconds 50
+  Start-Sleep -Milliseconds 50
   [System.Windows.Forms.SendKeys]::SendWait("^u")
-  start-sleep -Milliseconds 50
+  Start-Sleep -Milliseconds 50
   [System.Windows.Forms.SendKeys]::SendWait("{Down}")
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
   
@@ -64,8 +68,7 @@ static [boolean]TestProcess() {
   }
 }
 
-static [void]SetAlignment([Alignment]$Alignment) {
-  
+static [void]SetAlignment([Alignment]$Alignment) {  
     [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
      Start-Sleep -Milliseconds 50
     [System.Windows.Forms.SendKeys]::SendWait("^a")
@@ -87,8 +90,7 @@ static [void]SetAlignment([Alignment]$Alignment) {
     [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
 
-static [void]SetFontSize([int]$Size) {
-     
+static [void]SetFontSize([int]$Size) {     
      [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
      [System.Windows.Forms.SendKeys]::SendWait("^a")
      Start-Sleep -Milliseconds 50
@@ -110,7 +112,7 @@ static [void]SetFontSize([int]$Size) {
 }
 
 static [void]SetText([string]$Text,[boolean]$Append) {
-
+    #use the clipboard to insert text as it is faster
     $text | Set-Clipboard
     
     [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
@@ -130,6 +132,7 @@ static [void]SetText([string]$Text,[boolean]$Append) {
 
 static [void]NewNote ([string]$Text,[alignment]$Alignment="Left",[int]$FontSize=0,[boolean]$Bold,[boolean]$Underline,[boolean]$Italic) {
 
+#test if program is running and start it if it isn't.
 if (-Not ([myStickyNote]::TestProcess())) {
     Start-Process -FilePath Stikynot.exe
     Start-Sleep -Milliseconds 150
@@ -150,149 +153,42 @@ else {
   Start-Sleep -Milliseconds 50
   [System.Windows.Forms.SendKeys]::SendWait("{Enter}")
 
+  #set formatting by invoking class methods
   [MyStickyNote]::SetAlignment($Alignment)
   [MyStickyNote]::SetFontSize($FontSize)
   if ($bold) { [MyStickyNote]::ToggleBold()}
   if ($Underline) { [MyStickyNote]::ToggleUnderline()}
   if ($Italic) { [MyStickyNote]::ToggleItalic()}
   
+  #jump back to the PowerShell console
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
 
 #constructor
 
+#This will create a blank sticky note
 MyStickyNote() {
 
-if (-Not ([myStickyNote]::TestProcess())) {
-    Start-Process -FilePath Stikynot.exe
-    Start-Sleep -Milliseconds 150
-}
-else {
-    [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
-    [System.Windows.Forms.SendKeys]::SendWait("^n")
-}
-[Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
+    if (-Not ([myStickyNote]::TestProcess())) {
+        Start-Process -FilePath Stikynot.exe
+        Start-Sleep -Milliseconds 150
+    }
+    else {
+        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [System.Windows.Forms.SendKeys]::SendWait("^n")
+    }
+    #jump back to the PowerShell console
+    [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 
-
-} #New()
+} #New
 
 
 } #class
 
-Function Restore-StickyNote {
-[cmdletbinding()]
-Param()
+#dot source external functions
+. $PSScriptRoot\StickyNotesFunctions.ps1
 
-Write-Verbose "Starting: $($MyInvocation.Mycommand)"
-
-[myStickyNote]::new()
-
-Write-Verbose "Ending: $($MyInvocation.Mycommand)"
-
-}
-
-Function New-StickyNote {
-
-[cmdletbinding()]
-Param(
-[Parameter(
-Position=0,
-Mandatory,
-HelpMessage="Enter text for the sticky note"
-)]
-[string]$Text,
-[switch]$Bold,
-[switch]$Italic,
-[switch]$Underline,
-[ValidateSet("Left","Center","Right")]
-[string]$Alignment = "Left"
-)
-
-Write-Verbose "Starting $($MyInvocation.MyCommand)"
-#display PSBoundparameters formatted nicely for Verbose output  
-[string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
-
-[mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic)
-
-Write-Verbose "Ending $($MyInvocation.MyCommand)"
-
-
-} #end function
-
-Function Set-StickyNote {
-
-[cmdletbinding()]
-Param(
-[Parameter(position=0)]
-[string]$Text,
-[switch]$Bold,
-[switch]$Italic,
-[switch]$Underline,
-[ValidateSet("Left","Center","Right")]
-[string]$Alignment,
-[switch]$Append,
-[int]$FontSize = 0
-)
-
-Write-Verbose "Starting $($MyInvocation.MyCommand)"
-#display PSBoundparameters formatted nicely for Verbose output  
-[string]$pb = ($PSBoundParameters | Format-Table -AutoSize | Out-String).TrimEnd()
-Write-Verbose "PSBoundparameters: `n$($pb.split("`n").Foreach({"$("`t"*4)$_"}) | Out-String) `n" 
-
-if ($Text -AND $append) {
-Write-Verbose "Appending"
-    [MyStickyNote]::SetText($Text,$True)
-}
-elseif ($Text) {
-   [MyStickyNote]::SetText($Text,$False)
-}
-
-if ($Alignment) {
-    [MyStickyNote]::SetAlignment($Alignment)
-}
-
-if ($Bold) {
-    [MyStickyNote]::ToggleBold()
-}
-
-if ($Underline) {
-    [MyStickyNote]::ToggleUnderline()
-}
-if ($Italic) {
-    [MyStickyNote]::ToggleItalic()
-}
-
-if ($FontSize) {
-    [MyStickyNote]::SetFontSize($FontSize)
-}
-
-Write-Verbose "Ending $($MyInvocation.MyCommand)"
-
-
-} #end function
-
-Function Remove-StickyNote {
-
-[cmdletbinding(SupportsShouldProcess)]
-Param()
-
-Write-Verbose "Starting $($MyInvocation.MyCommand)"
-if ([mystickynote]::TestProcess()) {
-    if ($PSCmdlet.ShouldProcess("Sticky Notes")) {
-    [mystickynote]::Remove()
-    }
-}
-else {
-    Write-Warning "No sticky notes seem to be running"
-}
-
-Write-Verbose "Ending $($MyInvocation.MyCommand)"
-
-
-} #end function
-
-#define aliases
+#define some aliases
 Set-Alias -Name kn -Value Remove-StickyNote
 Set-Alias -Name sn -Value Set-StickyNote
 Set-Alias -Name nn -Value New-StickyNote
