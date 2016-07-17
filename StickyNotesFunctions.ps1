@@ -29,7 +29,9 @@ ValueFromPipeline
 [switch]$Italic,
 [switch]$Underline,
 [ValidateSet("Left","Center","Right")]
-[string]$Alignment = "Left"
+[string]$Alignment = "Left",
+[ValidateSet("Blue","Green","Pink","Purple","White","Yellow")]
+[string]$Color = "Yellow"
 )
 
 Begin {
@@ -41,7 +43,7 @@ Begin {
 
 Process {
     Write-Verbose "[PROCESS] Creating a sticky note."
-    [mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic)
+    [mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic,$Color)
 }
 
 End {
@@ -61,6 +63,8 @@ Param(
 [switch]$Underline,
 [ValidateSet("Left","Center","Right")]
 [string]$Alignment,
+[ValidateSet("Blue","Green","Pink","Purple","White","Yellow")]
+[string]$Color,
 [switch]$Append,
 [int]$FontSize = 0
 )
@@ -86,6 +90,11 @@ Process {
     if ($Alignment) {
         Write-Verbose "[PROCESS] Aligning $Alignment"
         [MyStickyNote]::SetAlignment($Alignment)
+    }
+
+    if ($Color) {
+        Write-Verbose "[PROCESS] Setting note color to $Color"
+        [MyStickyNote]::SetColor($Color)
     }
 
     if ($Bold) {

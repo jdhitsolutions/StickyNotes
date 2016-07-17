@@ -14,6 +14,15 @@ Enum Alignment {
     Center
 }
 
+Enum NoteColor {
+    Blue
+    Green
+    Pink
+    Purple
+    White
+    Yellow
+}
+
 Class MyStickyNote {
 
 #this class has no properties
@@ -57,6 +66,45 @@ static [void]ToggleUnderline() {
   [System.Windows.Forms.SendKeys]::SendWait("{Down}")
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
   
+}
+
+static [void]SetColor([NoteColor]$Color) {
+    [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+     Start-Sleep -Milliseconds 50
+    [System.Windows.Forms.SendKeys]::SendWait('+{F10}')
+   
+    Switch ($Color) {
+        "Blue" {
+            [System.Windows.Forms.SendKeys]::SendWait("b")
+            break
+        }
+        "Green" {
+            [System.Windows.Forms.SendKeys]::SendWait("g")
+            break
+        }
+        "Pink" {
+            [System.Windows.Forms.SendKeys]::SendWait("p")
+            [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+            break
+        }
+        'Purple' {
+            [System.Windows.Forms.SendKeys]::SendWait("p")
+            [System.Windows.Forms.SendKeys]::SendWait("p")
+            [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+            break
+        }
+        'White' {
+            [System.Windows.Forms.SendKeys]::SendWait("w")
+            break
+        }
+        'Yellow' {
+            [System.Windows.Forms.SendKeys]::SendWait("y")
+            break
+        }
+    } #switch
+
+    [System.Windows.Forms.SendKeys]::SendWait("{Down}")
+    [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
 
 static [boolean]TestProcess() {
@@ -130,7 +178,7 @@ static [void]SetText([string]$Text,[boolean]$Append) {
     
 }
 
-static [void]NewNote ([string]$Text,[alignment]$Alignment="Left",[int]$FontSize=0,[boolean]$Bold,[boolean]$Underline,[boolean]$Italic) {
+static [void]NewNote ([string]$Text,[alignment]$Alignment="Left",[int]$FontSize=0,[boolean]$Bold,[boolean]$Underline,[boolean]$Italic,[NoteColor]$Color="Yellow") {
 
 #test if program is running and start it if it isn't.
 if (-Not ([myStickyNote]::TestProcess())) {
@@ -159,7 +207,8 @@ else {
   if ($bold) { [MyStickyNote]::ToggleBold()}
   if ($Underline) { [MyStickyNote]::ToggleUnderline()}
   if ($Italic) { [MyStickyNote]::ToggleItalic()}
-  
+  [MyStickyNote]::SetColor($Color)
+
   #jump back to the PowerShell console
   [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 }
