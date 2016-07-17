@@ -13,7 +13,7 @@
 </maml:para>
 </maml:description>
 <command:syntax><command:syntaxItem><maml:name>New-StickyNote</maml:name>
-<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Text</maml:name>
 <maml:Description><maml:para>Enter text for the sticky note.
 </maml:para>
 </maml:Description>
@@ -57,7 +57,7 @@
 </command:parameter>
 </command:syntaxItem>
 </command:syntax>
-<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Text</maml:name>
 <maml:Description><maml:para>Enter text for the sticky note.
 </maml:para>
 </maml:Description>
@@ -117,7 +117,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -126,6 +126,12 @@
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
 <dev:code>PS C:\&gt; New-StickyNote "pickup milk on the way home" -bold -alignment center</dev:code>
 <dev:remarks><maml:para>Create a sticky note with bold text and centered
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+<dev:code>PS C:\&gt; (get-date).ToShortDateString() | new-stickynote</dev:code>
+<dev:remarks><maml:para>Pipe the current date as a string to a new sticky note.
 </maml:para>
 </dev:remarks>
 </command:example>
@@ -203,7 +209,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -235,16 +241,7 @@
 <command:syntax><command:syntaxItem><maml:name>Restore-StickyNote</maml:name>
 </command:syntaxItem>
 </command:syntax>
-<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>None</maml:name>
-<maml:Description><maml:para>
-</maml:para>
-</maml:Description>
-<command:parameterValue required="true" variableLength="false"></command:parameterValue>
-<dev:type><maml:name></maml:name>
-<maml:uri /></dev:type>
-<dev:defaultValue></dev:defaultValue>
-</command:parameter>
-</command:parameters>
+<command:parameters></command:parameters>
 <command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
 </dev:type>
 <maml:description><maml:para>
@@ -259,13 +256,13 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
 </maml:alert>
 </maml:alertSet>
-<command:examples><command:example><maml:title>Example 1</maml:title>
+<command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
 <dev:code>PS C:\&gt; Restore-StickyNote</dev:code>
 <dev:remarks><maml:para>
 </maml:para>
@@ -291,7 +288,7 @@
 </maml:para>
 </maml:description>
 <command:syntax><command:syntaxItem><maml:name>Set-StickyNote</maml:name>
-<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Text</maml:name>
 <maml:Description><maml:para>The text for the sticky note.
 </maml:para>
 </maml:Description>
@@ -352,7 +349,7 @@
 </command:parameter>
 </command:syntaxItem>
 </command:syntax>
-<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Text</maml:name>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Text</maml:name>
 <maml:Description><maml:para>The text for the sticky note.
 </maml:para>
 </maml:Description>
@@ -430,7 +427,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.0
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
