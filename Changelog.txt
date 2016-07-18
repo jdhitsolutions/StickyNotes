@@ -1,5 +1,9 @@
 #Changelog for StickyNotes
 
+v1.2.0.1
+incorporated pull request from mcharo that
+adds color options.
+
 v1.2.0.0
 modified New-StickyNote and Set-StickyNote to 
 accept text from pipeline.
