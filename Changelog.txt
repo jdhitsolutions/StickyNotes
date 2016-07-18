@@ -1,5 +1,9 @@
 #Changelog for StickyNotes
 
+v1.2.0.2
+removed Windows 10 specific features
+This module will not run on Windows 10.
+
 v1.2.0.1
 incorporated pull request from mcharo that
 adds color options.

@@ -2,10 +2,16 @@
 
 #StickyNotes.psm1
 
-#verify Stikynotes.exe and throw an error if not found
-If (-Not (Test-path $env:windir\system32\stikynot.exe)) {
-    Throw "Cannot find $env:windir\system32\stikynot.exe. This module is intended for client operating systems." 
+#verify note running a Server OS and throw an error if not found
+$OS = (Get-CimInstance -class Win32_Operatingsystem -Property Caption).Caption
+If ( $OS -match "Server|Windows 10" ) {
+    Throw "This module is intended for pre-Windows 10 client operating systems." 
 }
+
+#define a variable to reference the application 
+    $global:appName = "Sticky Notes"
+    $global:appProc = "stikynot"
+    $global:AppLaunch = [scriptblock]::Create("$env:windir\system32\stikynot.exe")
 
 #an enumeration that can be used in the functions
 Enum Alignment {
@@ -14,14 +20,6 @@ Enum Alignment {
     Center
 }
 
-Enum NoteColor {
-    Blue
-    Green
-    Pink
-    Purple
-    White
-    Yellow
-}
 
 Class MyStickyNote {
 
@@ -30,7 +28,7 @@ Class MyStickyNote {
     #methods
 
     static [void]Remove() {
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         [System.Windows.Forms.SendKeys]::SendWait("^d")
         [System.Windows.Forms.SendKeys]::SendWait("%Y")
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
@@ -38,7 +36,7 @@ Class MyStickyNote {
 
     static [void]ToggleFormat($FormatType) {
         $Clipboard = Get-Clipboard
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^a")
         Start-Sleep -Milliseconds 50
@@ -73,47 +71,10 @@ Class MyStickyNote {
         [MyStickyNote]::ToggleFormat('ul')
     }
 
-    static [void]SetColor([NoteColor]$Color) {
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
-        Start-Sleep -Milliseconds 50
-        [System.Windows.Forms.SendKeys]::SendWait('+{F10}')
 
-        Switch ($Color) {
-            "Blue" {
-                [System.Windows.Forms.SendKeys]::SendWait("b")
-                break
-            }
-            "Green" {
-                [System.Windows.Forms.SendKeys]::SendWait("g")
-                break
-            }
-            "Pink" {
-                [System.Windows.Forms.SendKeys]::SendWait("p")
-                [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-                break
-            }
-            'Purple' {
-                [System.Windows.Forms.SendKeys]::SendWait("p")
-                [System.Windows.Forms.SendKeys]::SendWait("p")
-                [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
-                break
-            }
-            'White' {
-                [System.Windows.Forms.SendKeys]::SendWait("w")
-                break
-            }
-            'Yellow' {
-                [System.Windows.Forms.SendKeys]::SendWait("y")
-                break
-            }
-            } #switch
-
-            [System.Windows.Forms.SendKeys]::SendWait("{Down}")
-            [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
-        }
-
-        static [boolean]TestProcess() {
-          if (Get-Process -Name StikyNot -ErrorAction SilentlyContinue) {
+    static [boolean]TestProcess() {
+        $proc = (Get-Process -name $global:appproc -ErrorAction SilentlyContinue)
+          if ($proc) {
             Return $True
         }
         else {
@@ -123,7 +84,7 @@ Class MyStickyNote {
 
     static [void]SetAlignment([Alignment]$Alignment) {
         $Clipboard = Get-Clipboard
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^a")
         Start-Sleep -Milliseconds 50
@@ -152,17 +113,29 @@ Class MyStickyNote {
 
     static [void]SetFontFamily([string]$FontFamily)
     {
-        $Clipboard = Get-Clipboard
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+      
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         Start-Sleep -Milliseconds 50
 
         [System.Windows.Forms.SendKeys]::SendWait("^a")
+        Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^c")
+        $Clipboard = Get-Clipboard
+        Start-Sleep -Milliseconds 50
         $RtfNote = [Windows.Clipboard]::GetData([System.Windows.Forms.DataFormats]::Rtf)
+         Start-Sleep -Milliseconds 50
         $RtfNote = $RtfNote -replace "fcharset0 [\w\s]*;}","fcharset0 $FontFamily;}" -replace "fnil [\w\s]*;}","fnil $FontFamily;}"
+        Start-Sleep -Milliseconds 50
+        if ($rtfNote) {
         [Windows.Clipboard]::SetData([System.Windows.Forms.DataFormats]::Rtf, $RtfNote)
+        Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^v")
+        Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("{BACKSPACE}")
+        }
+        else {
+            Write-Warning "There was a problem changing the font to $FontFamily"
+        }
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 
         $Clipboard | Set-Clipboard
@@ -171,7 +144,7 @@ Class MyStickyNote {
     static [string]FindNote([string]$Query,[int]$Timeout=10)
     {
         $Clipboard = Get-Clipboard
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         Start-Sleep -Milliseconds 50
 
         $Notes = @()
@@ -204,56 +177,78 @@ Class MyStickyNote {
     }
 
     static [void]SetFontSize([int]$Size) {
-        $Clipboard = Get-Clipboard
+        
         # double input to match final pt size
         $Size = $Size * 2
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^a")
         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^c")
+        $Clipboard = Get-Clipboard
         Start-Sleep -Milliseconds 150
         $RtfNote = [Windows.Clipboard]::GetData([System.Windows.Forms.DataFormats]::Rtf)
         $RtfNote = $RtfNote -replace "\\fs\d\d?\d?","\fs$Size"
-
+        if ($RtfNote) {
         [Windows.Clipboard]::SetData([System.Windows.Forms.DataFormats]::Rtf, $RtfNote)
         [System.Windows.Forms.SendKeys]::SendWait("^v")
         [System.Windows.Forms.SendKeys]::SendWait("{BACKSPACE}")
         Start-Sleep -Milliseconds 150
+        }
+        else {
+            Write-Warning "There was a problem setting font size"
+        }
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
         $Clipboard | Set-Clipboard
     }
 
     static [void]SetText([string]$Text,[boolean]$Append) {    
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
+        Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^a")
+         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("^c")
+        $Clipboard = Get-Clipboard
+        Start-Sleep -Milliseconds 150
         $RtfNote = [Windows.Clipboard]::GetData([System.Windows.Forms.DataFormats]::Rtf)
+        Start-Sleep -Milliseconds 50
         $TextNote = [Windows.Clipboard]::GetText([System.Windows.Forms.TextDataFormat]::Text)
+        start-sleep -Milliseconds 50
         if ($Append) {
             $RtfNote = $RtfNote -replace $TextNote,"$TextNote $Text"
         }
         else
         {
-            $RtfNote = $RtfNote -replace $TextNote,$Text
+            $RtfNote =  $RtfNote -replace $TextNote.Trim(),$Text
         }
-
-        $RtfNote = [Windows.Clipboard]::SetData([System.Windows.Forms.DataFormats]::Rtf, $RtfNote)
+        Start-Sleep -Milliseconds 100
+        If ($RtfNote) {
+          [Windows.Clipboard]::SetData([System.Windows.Forms.DataFormats]::Rtf, $RtfNote)
+          Start-Sleep -Milliseconds 50
+        }
+        else {
+            Write-Warning "There was an issue setting the text"
+        }
+        
         [System.Windows.Forms.SendKeys]::SendWait("^v")
+        Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("{BACKSPACE}")
+        Start-Sleep -Milliseconds 50
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 
     }
 
-    static [void]NewNote ([string]$Text,[alignment]$Alignment="Left",[int]$FontSize=0,[boolean]$Bold,[boolean]$Underline,[boolean]$Italic,[NoteColor]$Color="Yellow",[string]$FontFamily) {
+    static [void]NewNote ([string]$Text,[alignment]$Alignment="Left",[int]$FontSize=0,[boolean]$Bold,[boolean]$Underline,[boolean]$Italic,[string]$FontFamily) {
 
         #test if program is running and start it if it isn't.
-        if (-Not ([myStickyNote]::TestProcess())) {
-            Start-Process -FilePath Stikynot.exe
-            Start-Sleep -Milliseconds 150
+        if (-Not ([myStickyNote]::TestProcess())) {       
+            Invoke-Command -ScriptBlock $global:AppLaunch
+            do {
+             Start-Sleep -Milliseconds 50
+            } Until ( [myStickyNote]::TestProcess())
         }
-        else {
-            [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        else {           
+            [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
             Start-Sleep -Milliseconds 50
             [System.Windows.Forms.SendKeys]::SendWait("^n")
         }
@@ -261,22 +256,26 @@ Class MyStickyNote {
         #copy text to clipboard and paste it. Faster than trying to send keys
         $text | Set-Clipboard
 
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         [System.Windows.Forms.SendKeys]::SendWait("^v")
-        [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+        [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
         #give the paste a moment to complete
         Start-Sleep -Milliseconds 50
         [System.Windows.Forms.SendKeys]::SendWait("{Enter}")
 
         #set formatting by invoking class methods
         [MyStickyNote]::SetAlignment($Alignment)
-        [MyStickyNote]::SetFontSize($FontSize)
+        Start-Sleep -Milliseconds 50
+        #only adjust fontsize if specified and not 0
+        if ($FontSize -ne 0 -AND $fontSize) {
+            [MyStickyNote]::SetFontSize($FontSize)
+        }
         if ($bold) { [MyStickyNote]::ToggleBold()}
         if ($Underline) { [MyStickyNote]::ToggleUnderline()}
         if ($Italic) { [MyStickyNote]::ToggleItalic()}
         if ($FontFamily) { [MyStickyNote]::SetFontFamily($FontFamily) }
-        [MyStickyNote]::SetColor($Color)
-
+        Start-Sleep -Milliseconds 100
+    
         #jump back to the PowerShell console
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
     }
@@ -287,18 +286,19 @@ Class MyStickyNote {
     MyStickyNote() {
 
         if (-Not ([myStickyNote]::TestProcess())) {
-            Start-Process -FilePath Stikynot.exe
-            Start-Sleep -Milliseconds 150
+            Invoke-Command -ScriptBlock $global:AppLaunch
+            do {
+             Start-Sleep -Milliseconds 50
+            } Until ( [myStickyNote]::TestProcess())
         }
         else {
-            [Microsoft.VisualBasic.Interaction]::AppActivate("Sticky Notes")
+            [Microsoft.VisualBasic.Interaction]::AppActivate($global:appName)
             [System.Windows.Forms.SendKeys]::SendWait("^n")
         }
         #jump back to the PowerShell console
         [Microsoft.VisualBasic.Interaction]::AppActivate($global:pid)
 
     } #New
-
 
 } #class
 

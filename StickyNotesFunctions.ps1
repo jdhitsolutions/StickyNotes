@@ -30,11 +30,8 @@ Function New-StickyNote {
         [switch]$Underline,
         [ValidateSet("Left","Center","Right")]
         [string]$Alignment = "Left",
-        [ValidateSet("Blue","Green","Pink","Purple","White","Yellow")]
-        [string]$Color = "Yellow",
         [ValidateScript({
-            (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name -contains $_
-            })]
+            [System.Drawing.Text.InstalledFontCollection]::new().Families.Name -contains $_ })]
         [string]$FontFamily = "Segoe Print"
         )
 
@@ -47,7 +44,7 @@ Function New-StickyNote {
 
     Process {
         Write-Verbose "[PROCESS] Creating a sticky note."
-        [mystickynote]::NewNote($Text,$Alignment,0,$Bold,$underline,$Italic,$Color,$FontFamily)
+        [mystickynote]::NewNote($Text,$Alignment,12,$Bold,$underline,$Italic,$FontFamily)
     }
 
     End {
@@ -67,14 +64,11 @@ Function Set-StickyNote {
         [switch]$Underline,
         [ValidateSet("Left","Center","Right")]
         [string]$Alignment,
-        [ValidateSet("Blue","Green","Pink","Purple","White","Yellow")]
-        [string]$Color,
         [switch]$Append,
         [ValidateScript({
-            (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name -contains $_
-            })]
+            [System.Drawing.Text.InstalledFontCollection]::new().Families.Name -contains $_ })]
         [string]$FontFamily,
-        [int]$FontSize = 0
+        [int]$FontSize
         )
 
     Begin {
@@ -98,11 +92,6 @@ Function Set-StickyNote {
         if ($Alignment) {
             Write-Verbose "[PROCESS] Aligning $Alignment"
             [MyStickyNote]::SetAlignment($Alignment)
-        }
-
-        if ($Color) {
-            Write-Verbose "[PROCESS] Setting note color to $Color"
-            [MyStickyNote]::SetColor($Color)
         }
 
         if ($Bold) {
