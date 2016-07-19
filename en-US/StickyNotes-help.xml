@@ -55,6 +55,17 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>Left</dev:defaultValue>
 </command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontFamily</maml:name>
+<maml:Description><maml:para>Enter the name of a font family like Consolas, Verdana or Tahoma. You can see a list of names with this command:
+</maml:para>
+<maml:para>    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
 </command:syntaxItem>
 </command:syntax>
 <command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Text</maml:name>
@@ -102,6 +113,17 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>Left</dev:defaultValue>
 </command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontFamily</maml:name>
+<maml:Description><maml:para>Enter the name of a font family like Consolas, Verdana or Tahoma. You can see a list of names with this command:
+</maml:para>
+<maml:para>    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
 </command:parameters>
 <command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
 </dev:type>
@@ -117,7 +139,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.2
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2.0.3
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -209,7 +231,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.2
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2.0.3
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -256,7 +278,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.2
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2.0.3
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -285,6 +307,10 @@
 <maml:description><maml:para>This command will set the text and style for a sticky note. If there are multiple notes, this command will set the one that has focus, which you must do manually. The default is the last note created.
 </maml:para>
 <maml:para>The style parameters like -Bold behave more like toggles. If text is already in bold than using -Bold will turn it off and vice versa.
+</maml:para>
+<maml:para>The FontFamily parameter is the name of a font like Consolas, Verdana or Tahoma. You can see a list of names with this command:
+</maml:para>
+<maml:para>    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
 </maml:para>
 </maml:description>
 <command:syntax><command:syntaxItem><maml:name>Set-StickyNote</maml:name>
@@ -346,6 +372,17 @@
 <dev:type><maml:name>Int32</maml:name>
 <maml:uri /></dev:type>
 <dev:defaultValue>0</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontFamily</maml:name>
+<maml:Description><maml:para>Enter the name of a font family like Consolas, Verdana or Tahoma. You can see a list of names with this command:
+</maml:para>
+<maml:para>    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
 </command:parameter>
 </command:syntaxItem>
 </command:syntax>
@@ -412,6 +449,17 @@
 <maml:uri /></dev:type>
 <dev:defaultValue>0</dev:defaultValue>
 </command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>FontFamily</maml:name>
+<maml:Description><maml:para>Enter the name of a font family like Consolas, Verdana or Tahoma. You can see a list of names with this command:
+</maml:para>
+<maml:para>    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
 </command:parameters>
 <command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
 </dev:type>
@@ -427,7 +475,7 @@
 </maml:description>
 </command:returnValue>
 </command:returnValues>
-<maml:alertSet><maml:alert><maml:para>Version     : 1.2
+<maml:alertSet><maml:alert><maml:para>Version     : 1.2.0.3
 </maml:para>
 <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 </maml:para>
@@ -435,7 +483,13 @@
 </maml:alertSet>
 <command:examples><command:example><maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
 <dev:code>PS C:\&gt; set-stickynote "pickup bread on the way home" -bold -underline -append</dev:code>
-<dev:remarks><maml:para>
+<dev:remarks><maml:para>Set the sticky note with a new message that will be appended. The entire note will be in bold and underline.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
+<dev:code>PS C:\&gt; set-stickynote -fontFamily Tahoma</dev:code>
+<dev:remarks><maml:para>Set the font of the current sticky note to Tahoma.
 </maml:para>
 </dev:remarks>
 </command:example>
