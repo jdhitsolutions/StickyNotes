@@ -1,5 +1,9 @@
 #Changelog for StickyNotes
 
+v1.2.0.3
+updated help documentation
+revised SetText() class method to simplify it.
+
 v1.2.0.2
 removed Windows 10 specific features
 This module will not run on Windows 10.

@@ -64,7 +64,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## NOTES
-Version     : 1.2
+Version     : 1.2.0.3
 
 Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/

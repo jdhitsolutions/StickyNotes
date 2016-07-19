@@ -10,7 +10,8 @@ Create a new sticky note.
 ## SYNTAX
 
 ```
-New-StickyNote [-Text] <String> [-Bold] [-Italic] [-Underline] [-Alignment <String>] [<CommonParameters>]
+New-StickyNote [-Text] <String> [-Bold] [-Italic] [-Underline] [-Alignment <String>] [-FontFamily <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,7 +25,6 @@ PS C:\> New-StickyNote "pickup milk on the way home" -bold -alignment center
 ```
 
 Create a sticky note with bold text and centered
-
 ### -------------------------- EXAMPLE 2 --------------------------
 ```
 PS C:\> (get-date).ToShortDateString() | new-stickynote
@@ -108,6 +108,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -FontFamily
+Enter the name of a font family like Consolas, Verdana or Tahoma.
+You can see a list of names with this command:
+
+    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: 
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
@@ -119,7 +137,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## NOTES
-Version     : 1.2
+Version     : 1.2.0.3
 
 Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/

@@ -11,7 +11,7 @@ Set text and style for a sticky note.
 
 ```
 Set-StickyNote [[-Text] <String>] [-Bold] [-Italic] [-Underline] [-Alignment <String>] [-Append]
- [-FontSize <Int32>] [<CommonParameters>]
+ [-FontFamily <String>] [-FontSize <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -21,12 +21,29 @@ The default is the last note created.
 
 The style parameters like -Bold behave more like toggles.
 If text is already in bold than using -Bold will turn it off and vice versa.
+
+The FontFamily parameter is the name of a font like Consolas, Verdana or Tahoma.
+You can see a list of names with this command:
+
+    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```
 PS C:\> set-stickynote "pickup bread on the way home" -bold -underline -append
+
 ```
+
+Set the sticky note with a new message that will be appended. The entire note
+will be in bold and underline.
+
+### -------------------------- EXAMPLE 2 --------------------------
+```
+PS C:\> set-stickynote -fontFamily Tahoma
+```
+
+Set the font of the current sticky note to Tahoma.
 
 ## PARAMETERS
 
@@ -138,6 +155,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -FontFamily
+Enter the name of a font family like Consolas, Verdana or Tahoma.
+You can see a list of names with this command:
+
+    [System.Drawing.Text.InstalledFontCollection]::new().Families.Name
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: 
+
+Required: False
+Position: Named
+Default value: 
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 ## INPUTS
@@ -149,7 +184,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## NOTES
-Version     : 1.2
+Version     : 1.2.0.3
 
 Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/
