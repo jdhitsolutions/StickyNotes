@@ -1,5 +1,7 @@
 #Changelog for StickyNotes
 
+End of Development
+
 v1.2.0.3
 updated help documentation
 revised SetText() class method to simplify it.
